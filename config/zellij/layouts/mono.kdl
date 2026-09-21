@@ -1,0 +1,63 @@
+// ~/.config/zellij/layouts/mono.kdl
+//
+// MonoShare. Single checkout, no worktrees, default ports.
+// Open with:  zellij -s mono --layout mono
+//
+// The two dev server panes are start_suspended — they show a
+// "Waiting to run" banner and only launch when you press ENTER
+// in them. Nothing starts on its own.
+
+layout {
+
+    default_tab_template {
+      //children above or below the pane block defines where the taskbar stands
+        children
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+        //children
+    }
+
+    // Claude, at the repo root so it can see frontend and backend both.
+    tab name="claude" focus=true {
+        pane cwd="/home/danny/projects/MonoShare"
+    }
+
+    // Edit fullscreen 1 Pane
+    tab name="edit" {
+        pane cwd="/home/danny/projects/MonoShare"
+    }
+
+    // Edit big pane, small secondary under
+    tab name="edit++" {
+        pane split_direction="horizontal" {
+            pane cwd="/home/danny/projects/MonoShare" size="75%"
+            pane cwd="/home/danny/projects/MonoShare"
+        }
+    }
+
+    // Both servers side by side. ENTER in each to start it.
+    tab name="dev" {
+        pane split_direction="vertical" {
+            pane name="frontend" cwd="/home/danny/projects/MonoShare/frontend" command="npm" start_suspended=true {
+                args "run" "dev"
+            }
+            pane name="backend" cwd="/home/danny/projects/MonoShare/backend" command="npm" start_suspended=true {
+                args "run" "dev"
+            }
+        }
+    }
+
+    // Spare shells, one per side, for installs and one-off commands.
+    tab name="shell" {
+        pane split_direction="vertical" {
+            pane cwd="/home/danny/projects/MonoShare/frontend"
+            pane cwd="/home/danny/projects/MonoShare/backend"
+        }
+    }
+
+    tab name="git" {
+        pane cwd="/home/danny/projects/MonoShare"
+    }
+}
+

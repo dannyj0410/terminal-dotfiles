@@ -1,0 +1,18 @@
+// ~/.config/zellij/layouts/dev.kdl
+layout {
+    tab name="claude" focus=true {
+        pane command="claude"
+    }
+    tab name="edit" {
+        pane command="nvim"
+    }
+    tab name="shell" {
+        pane split_direction="vertical" {
+            pane
+            pane
+        }
+    }
+    tab name="git" {
+        pane command="lazygit"
+    }
+}

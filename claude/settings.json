@@ -1,0 +1,9 @@
+{
+  "preferredNotifChannel": "terminal_bell",
+  "worktree": {
+    "baseRef": "fresh"
+  },
+  "env": {
+    "CLAUDE_CODE_NO_FLICKER": "1"
+  }
+}

@@ -1,0 +1,38 @@
+// ~/.config/zellij/layouts/work.kdl
+//
+// Your standing workspace, not tied to any ticket. Open it with:  zj work
+//
+// Panes marked start_suspended show a "Waiting to run" banner and only
+// launch when you press ENTER in them. Nothing starts on its own.
+
+layout {
+    // Without this, a custom layout renders with no tab bar at all.
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+        children
+    }
+
+    // Shells. cd into whichever worktree you want and run the app:
+    //   cd ~/worktrees/ON-1234 && npm run dev -- --port 5182
+    tab name="shells" focus=true {
+        pane split_direction="vertical" {
+            pane
+            pane
+        }
+    }
+
+    tab name="claude" {
+        pane command="claude" start_suspended=true
+    }
+
+    tab name="edit" {
+        pane command="nvim" start_suspended=true
+    }
+
+    tab name="git" {
+        pane command="lazygit" start_suspended=true
+    }
+}
+

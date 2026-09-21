@@ -1,0 +1,48 @@
+// ~/.config/zellij/config.kdl
+
+default_shell "/usr/bin/fish"
+default_layout "compact"
+theme "catppuccin-mocha"
+
+pane_frames false
+mouse_mode true
+copy_on_select false
+copy_command "win32yank.exe -i --crlf"
+
+scroll_buffer_size 20000
+session_serialization true
+serialize_pane_viewport true
+scrollback_lines_to_serialize 5000
+
+show_startup_tips false
+show_release_notes false
+
+keybinds {
+    // Hand every Ctrl chord back to the program inside the pane.
+    // Claude Code: Ctrl+B background, Ctrl+T todos, Ctrl+O, Ctrl+R.
+    // fish: Ctrl+P/Ctrl+N history, Ctrl+S. Terminals: Ctrl+H = backspace.
+    unbind "Ctrl b" "Ctrl g" "Ctrl h" "Ctrl n" "Ctrl o" "Ctrl p" "Ctrl q" "Ctrl s" "Ctrl t"
+
+    shared_except "locked" {
+        bind "Alt g" { SwitchToMode "Locked"; }
+        bind "Alt p" { SwitchToMode "Pane"; }
+        bind "Alt t" { SwitchToMode "Tab"; }
+        bind "Alt r" { SwitchToMode "Resize"; }
+        bind "Alt m" { SwitchToMode "Move"; }
+        bind "Alt s" { SwitchToMode "Scroll"; }
+        bind "Alt o" { SwitchToMode "Session"; }
+        bind "Alt Q" { Quit; }
+    }
+
+    // Ctrl+g was the only way out of Locked mode; replace it.
+    locked {
+        bind "Alt g" { SwitchToMode "Normal"; }
+    }
+
+    normal {
+        bind "Alt d" { NewPane "Down"; }
+        bind "Alt v" { NewPane "Right"; }
+        bind "Alt z" { ToggleFocusFullscreen; }
+        bind "Alt x" { CloseFocus; }
+    }
+}
